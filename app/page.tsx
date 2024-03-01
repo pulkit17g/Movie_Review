@@ -33,7 +33,7 @@ export default function Home() {
         <SearchBar placeholder="Search for your favourite movie" />
         <div className="movies mt-5 grid grid-cols-3 gap-4">
           {movies.map((movie, index) => (
-            <Link href={`/reviews`} key={index}>
+            <Link href={`/reviews?id=${movie.id}`} key={index}>
               <div
                 className="p-4 bg-[#E0DEFD] flex flex-col cursor-pointer"
                 key={index}

@@ -1,13 +1,17 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import PrimaryContainer from '../containers/primaryContainer'
-import { useRouter } from 'next/router'
+import PrimaryContainer from '../../containers/primaryContainer'
+import { useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
 const Page = () => {
     const router = useRouter()
-    const { id } = router.query;
+    const searchParams = useSearchParams()
+ 
+    const id = searchParams.get('id')
+    console.log(id)
   
-  // const [reviews,setReviews] = useState([])
+  const [reviews,setReviews] = useState([])
   useEffect(() => {
     const fetchReviews = async () => {
       try {
