@@ -1,14 +1,17 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import PrimaryContainer from '../containers/primaryContainer'
-
+import { useRouter } from 'next/router';
 
 const Reviews = () => {
+    const router = useRouter();
+    const { id } = router.query;
+  
   const [reviews,setReviews] = useState([])
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await fetch("/api/reviews");
+        const response = await fetch(`/api/reviews/${id}`);
         const data = await response.json();
         if (data.reviews) {
           console.log(data);

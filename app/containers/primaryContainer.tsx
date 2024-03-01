@@ -6,9 +6,10 @@ import AddReview from "../modalContent/addReview";
 
 interface PrimaryContainerProps {
   children: ReactElement;
+  movies:any;
 }
 
-const PrimaryContainer = ({ children }: PrimaryContainerProps) => {
+const PrimaryContainer = ({ children,movies }: PrimaryContainerProps) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [clickedName,setClickedName] = useState<String>("")
 
@@ -42,7 +43,7 @@ const PrimaryContainer = ({ children }: PrimaryContainerProps) => {
       <div className="w-full h-full px-5 py-5">
       {modalOpen && (
           <Modal isOpen={modalOpen} handleClose={handleClose}>
-           {clickedName ==="movie"? <AddMovie />:<AddReview/>}
+           {clickedName ==="movie"? <AddMovie />:<AddReview movies={movies}/>}
           </Modal>
         )}
         {children}

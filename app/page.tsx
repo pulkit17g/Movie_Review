@@ -1,19 +1,19 @@
-"use client"
-import React, { useState, useEffect } from 'react';
+"use client";
+import React, { useState, useEffect } from "react";
 import SearchBar from "./components/searchBar";
 import PrimaryContainer from "./containers/primaryContainer";
+import Link from "next/link";
 
 export default function Home() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    // Function to fetch movies data
     const fetchMovies = async () => {
       try {
-        const response = await fetch('/api/movies'); // Adjust the URL as needed
+        const response = await fetch("/api/movies");
         const data = await response.json();
         if (data.movies) {
-          console.log(data)
+          console.log(data);
           setMovies(data.movies);
         }
       } catch (error) {
@@ -25,7 +25,7 @@ export default function Home() {
   }, []);
 
   return (
-    <PrimaryContainer>
+    <PrimaryContainer movies={movies}>
       <div className="w-full h-full">
         <div className="text-xl text-[#293845] font-bold pb-5">
           The best movie reviews site!
@@ -33,11 +33,16 @@ export default function Home() {
         <SearchBar placeholder="Search for your favourite movie" />
         <div className="movies mt-5 grid grid-cols-3 gap-4">
           {movies.map((movie, index) => (
-            <div className="p-4 bg-[#E0DEFD] flex flex-col" key={index}>
-              <div>{movie.name}</div>
-              <div>{movie.releaseDate}</div>
-              <div>{movie.averageRating}</div>
-            </div>
+            <Link href={`/reviews`} key={index}>
+              <div
+                className="p-4 bg-[#E0DEFD] flex flex-col cursor-pointer"
+                key={index}
+              >
+                <div>{movie.name}</div>
+                <div>{movie.releaseDate}</div>
+                <div>{movie.averageRating}</div>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
