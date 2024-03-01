@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
 const AddMovie = () => {
-  // State hooks for each form input
+
   const [name, setName] = useState("");
   const [releaseDate, setReleaseDate] = useState("");
   const [averageRating, setAverageRating] = useState("");
 
-  // Handle form submission
+    
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -27,6 +27,7 @@ const AddMovie = () => {
 
       const result = await response.json();
       console.log("Movie created:", result);
+      window.location.reload();
     } catch (error) {
       console.error("Failed to create movie:", error);
     }
@@ -47,13 +48,6 @@ const AddMovie = () => {
         placeholder="Release Date"
         value={releaseDate}
         onChange={(e) => setReleaseDate(e.target.value)}
-        className="w-full border border-gray-400 pl-2 py-1"
-      />
-      <input
-        type="text"
-        placeholder="Average Rating"
-        value={averageRating}
-        onChange={(e) => setAverageRating(e.target.value)}
         className="w-full border border-gray-400 pl-2 py-1"
       />
       <div className="w-full flex justify-end">

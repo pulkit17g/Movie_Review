@@ -45,12 +45,12 @@ export default function Home() {
           {filteredMovies.map((movie, index) => (
             <Link href={`/reviews?id=${movie.id}`} key={index}>
               <div
-                className="p-4 bg-[#E0DEFD] flex flex-col cursor-pointer"
+                className="p-4 bg-[#E0DEFD] flex flex-col cursor-pointer gap-2"
                 key={index}
               >
                 <div>{movie.name}</div>
-                <div>{movie.releaseDate}</div>
-                <div>{movie.averageRating}</div>
+                <div className=" italic">Released: {movie.releaseDate}</div>
+                <div className="font-bold">Rating: {movie.averageRating}/10</div>
               </div>
             </Link>
           ))}

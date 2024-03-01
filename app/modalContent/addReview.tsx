@@ -1,17 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const AddReview = (props) => {
-    // State hooks for form inputs
+
     const [reviewComments, setReviewComments] = useState('');
     const [movieId, setMovieId] = useState('');
     const [rating, setRating] = useState('');
     const [reviewerName, setReviewerName] = useState('');
+    const [movies,setMovies] =useState([])
     console.log(props.movies)
-    // Handle form submission
-    const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent default form submission behavior
 
-        // Data to be sent in the request
+    useEffect(() => {
+        const fetchMovies = async () => {
+          try {
+            const response = await fetch("/api/movies");
+            const data = await response.json();
+            if (data.movies) {
+              console.log(data);
+              setMovies(data.movies);
+            }
+          } catch (error) {
+            console.error("Failed to fetch movies:", error);
+          }
+        };
+    
+        fetchMovies();
+      }, []);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault(); 
         const reviewData = { reviewComments, movieId, rating, reviewerName };
 
         try {
@@ -30,7 +46,7 @@ const AddReview = (props) => {
 
             const result = await response.json();
             console.log('Review created successfully:', result);
-
+            window.location.reload();
         } catch (error) {
             console.error('Failed to create review:', error);
     
@@ -42,7 +58,7 @@ const AddReview = (props) => {
             <div className="text-lg">Add a new review</div>
             <select value={movieId} onChange={(e) => setMovieId(e.target.value)} className="w-full border border-gray-400 pl-2 py-1">
                 <option value="">Select Movie</option>
-                {props.movies.map(movie => (
+                {movies.map(movie => (
                     <option key={movie.id} value={movie.id}>{movie.name}</option>
                 ))}
             </select>

@@ -17,7 +17,7 @@ model Movie {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
   name          String
   releaseDate   String
-  averageRating String
+  averageRating String?
   reviews       Review[]
 }
 
