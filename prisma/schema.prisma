@@ -9,6 +9,23 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+model Movie {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  releaseDate   String
+  averageRating String
+  reviews       Review[]
+}
+
+model Review {
+  id             String  @id @default(auto()) @map("_id") @db.ObjectId
+  reviewerName   String?
+  rating         String
+  reviewComments String
+  Movie          Movie?  @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  movieId        String? @db.ObjectId
 }
