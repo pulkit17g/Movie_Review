@@ -1,14 +1,18 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import PrimaryContainer from '../containers/primaryContainer'
-
+import { useSearchParams } from 'next/navigation'
 
 const Reviews = () => {
   const [reviews,setReviews] = useState([])
+  const searchParams = useSearchParams()
+ 
+  const id = searchParams.get('id')
+  console.log(id)
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await fetch("/api/reviews");
+        const response = await  fetch(`/api/review/${id}`);
         const data = await response.json();
         if (data.reviews) {
           console.log(data);
