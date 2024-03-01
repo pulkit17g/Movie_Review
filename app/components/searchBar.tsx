@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import SearchIcon from './../assets/icons/SearchIcon.svg';
 
-const SearchBar = (props) => {
-  const handleInputChange = (e) => {
+const SearchBar = (props: { onChange: (arg0: any) => void; placeholder: string | undefined; value: string | number | readonly string[] | undefined; }) => {
+  const handleInputChange = (e: any) => {
     if (props.onChange) {
       props.onChange(e);
     }

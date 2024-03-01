@@ -4,8 +4,15 @@ import PrimaryContainer from "./containers/primaryContainer";
 import Link from "next/link";
 import SearchBar from "./components/searchBar";
 
+interface Movie {
+  name:string,
+  id:string,
+  releaseDate:string,
+  averageRating:string
+}
+
 export default function Home() {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -31,7 +38,7 @@ export default function Home() {
   );
 
   return (
-    <PrimaryContainer movies={movies}>
+    <PrimaryContainer>
       <div className="w-full h-full">
         <div className="text-xl text-[#293845] font-bold pb-5">
           The best movie reviews site!

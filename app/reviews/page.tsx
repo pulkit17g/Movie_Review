@@ -3,10 +3,23 @@ import React, { useEffect, useState } from 'react'
 import PrimaryContainer from '../containers/primaryContainer'
 import { useSearchParams } from 'next/navigation'
 
+interface Movie {
+  name:string,
+  id:string,
+  releaseDate:string,
+  averageRating:string
+}
+interface Review {
+  reviewerName:string,
+  reviewComments:string,
+  releaseDate:string,
+  rating:string
+}
+
 const Reviews = () => {
-  const [reviews,setReviews] = useState([])
+  const [reviews,setReviews] = useState<Review[]>([])
   const searchParams = useSearchParams()
-  const [movie,setMovie] = useState()
+  const [movie,setMovie] = useState<Movie>()
  
   const id = searchParams.get('id')
   console.log(id)

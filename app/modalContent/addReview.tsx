@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
+interface Movie {
+    id: string;
+    name: string;
+}
 
-const AddReview = (props) => {
+const AddReview = () => {
 
     const [reviewComments, setReviewComments] = useState('');
     const [movieId, setMovieId] = useState('');
     const [rating, setRating] = useState('');
     const [reviewerName, setReviewerName] = useState('');
-    const [movies,setMovies] =useState([])
-    console.log(props.movies)
+    const [movies, setMovies] = useState<Movie[]>([]);
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -26,7 +29,7 @@ const AddReview = (props) => {
         fetchMovies();
       }, []);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
         const reviewData = { reviewComments, movieId, rating, reviewerName };
 
