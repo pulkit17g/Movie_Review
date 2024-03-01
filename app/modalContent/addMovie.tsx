@@ -8,7 +8,7 @@ const AddMovie = () => {
   const [averageRating, setAverageRating] = useState("");
 
     
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
     const movieData = { name, releaseDate, averageRating };
